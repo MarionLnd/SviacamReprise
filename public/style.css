@@ -1,0 +1,46 @@
+* {
+	font-family: 'Roboto Slab', serif;
+}
+
+.row-eq{
+	display: flex;
+}
+.col-eq{
+	flex: 1;
+	background: #ccc;
+	margin: 10px;
+    width: 400px;
+    height: 300px
+}
+.threshold_container{
+	border : 1px solid black;
+}
+#threshold {
+	margin-top: 41px;
+}
+
+.threshold_label {
+	margin-top: 35px;
+}
+
+.blue {
+	border : 1px solid blue
+}
+
+.red {
+	border : 1px solid red
+}
+
+h4 {
+	letter-spacing: 1px;
+	padding: 10px 0px;
+}
+
+
+#movement {
+	position: absolute;
+	top: 30;
+	left: 30;
+	border: 1px solid red;
+	background: rgba(255,0,0,0.3);
+}
