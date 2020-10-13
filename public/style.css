@@ -44,3 +44,9 @@ h4 {
 	border: 1px solid red;
 	background: rgba(255,0,0,0.3);
 }
+
+canvas {
+	transform: rotateY(180deg);
+	-webkit-transform:rotateY(180deg); /* Safari and Chrome */
+	-moz-transform:rotateY(180deg); /* Firefox */
+}
