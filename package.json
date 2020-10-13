@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run-dev": "nodemon app.js",
+    "run": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
     "express-session": "^1.16.1",
     "jquery": "^3.4.1",
     "konva": "^3.2.6",
+    "nodemon": "^2.0.4",
     "popper.js": "^1.16.1",
     "robotjs": "^0.6.0",
     "socket.io": "^2.2.0",
