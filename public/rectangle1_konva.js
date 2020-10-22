@@ -154,7 +154,7 @@ var rect2 = new Konva.Rect({
             pos.y = MAX_HEIGHT2 - height2;
         }
 
-        points = {
+        points2 = {
             "x": pos.x,
             "y":pos.y,
             "width":width2,
@@ -173,19 +173,19 @@ var tr2 = new Konva.Transformer({
         
       // Points set when the rectangle is descreased of increased
       if (newBoundBox.x < MIN_X2) {
-        tr.stopTransform();
+        tr2.stopTransform();
         newBoundBox.x = MIN_X;
       }
       if (MAX_X2 > MAX_WIDTH2) {
-        tr.stopTransform();
+        tr2.stopTransform();
         newBoundBox.x = MAX_WIDTH2 - newBoundBox.width;
       }
       if (newBoundBox.y < MIN_Y2) {
-        tr.stopTransform();
+        tr2.stopTransform();
         newBoundBox.y = MIN_Y2;
       }
       if (MAX_Y2 > MAX_HEIGHT2) {
-        tr.stopTransform();
+        tr2.stopTransform();
         newBoundBox.y = MAX_HEIGHT2 - newBoundBox.height;
       }
 
@@ -202,7 +202,7 @@ var tr2 = new Konva.Transformer({
         newBoundBox.height = MIN_HEIGHT2;
       }
       
-      points = {
+      points2 = {
           "x": newBoundBox.x,
           "y":newBoundBox.y,
           "width":newBoundBox.width,
@@ -238,11 +238,7 @@ $('#rect1').click(function () {
     } else {
         $('#select_rect1').attr('disabled', true);
         rect1.hide();
-        tr.hide()
-
-        $('#select_rect2').attr('disabled', true);
-        rect2.hide();
-        tr.hide()
+        tr.hide();
         
         layer.draw();
     }
@@ -266,7 +262,7 @@ $('#rect2').click(function () {
   }
 });
 //both 
-if (($(this).is(':checked')) && ($('#rect2').is(':checked')) ){
+if (($('#rect1').is(':checked')) && ($('#rect2').is(':checked')) ){
   $('#select_rect1').removeAttr('disabled');
   layer.add(rect1);
   layer.add(tr);
@@ -300,4 +296,23 @@ $('#threshold').click(function () {
     } else {
       points_value = {}
     }
+});
+$('#threshold').click(function () {
+  if (($(this).is(':checked'))) {
+      key = $("#select_rect2").val().toLowerCase();
+      // if points_value is empty (not dragged or transformed)
+      if (Object.keys(points2).length === 0 && points2.constructor === Object) {
+          points_value2 = {
+              "x":rect2.x(),
+              "y":rect2.y(),
+              "width":rect2.width(),
+              "height":rect2.height()
+          }
+          
+      } else {
+        points_value2 = points2
+      }
+  } else {
+    points_value2 = {}
+  }
 });
