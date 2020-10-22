@@ -31,6 +31,7 @@ io.on('connection', function (socket) {
       }else if (key == 'mouse_right'){
         robot.moveMouseSmooth(mouse.x + 50, mouse.y);
       }
+    console.log(mouse)
     //Id the type of key is key press
     } else {
       robot.keyTap(key);

@@ -24,29 +24,30 @@
 }
 
 .blue {
-	border : 1px solid blue
+	border : 1px solid blue;
 }
 
 .red {
-	border : 1px solid red
+	border : 1px solid red;
 }
 
 h4 {
 	letter-spacing: 1px;
-	padding: 10px 0px;
+	padding: 10px 0;
 }
 
 
 #movement {
 	position: absolute;
-	top: 30;
-	left: 30;
+	/*top: 30;
+	left: 30;*/
 	border: 1px solid red;
 	background: rgba(255,0,0,0.3);
 }
 
 canvas {
-	transform: rotateY(180deg);
+	/*transform: rotateY(180deg);
 	-webkit-transform:rotateY(180deg); /* Safari and Chrome */
-	-moz-transform:rotateY(180deg); /* Firefox */
+	/*-moz-transform:rotateY(180deg); /* Firefox */
 }
+

@@ -1,22 +1,27 @@
-//set width and height of the stage and webcam
-const width = 400;
-const height = 300;
+// Set width and height of the stage and webcam
+let width = window.innerWidth - 300
+let height = window.innerHeight - 100
 
-var video = document.createElement('video')
+$(window).resize(function() {
+    //width = $( window ).width()
+    //height = $( window ).height()
+})
+
+let video = document.createElement('video')
 video.autoplay = true
 
 // Creation of Konva Stage
-var stage = new Konva.Stage({
-    container: 'container',
+let stage = new Konva.Stage({
+    container: 'video-container',
     width: width,
     height: height
 });
 
 // Creation of Konva Layer
-var layer = new Konva.Layer();
+let layer = new Konva.Layer();
 stage.add(layer);
 
-var webcam = new Konva.Image({
+let webcam = new Konva.Image({
     image: video,
     x: 0,
     y: 0,
@@ -25,7 +30,7 @@ var webcam = new Konva.Image({
 });
 layer.add(webcam);
 
-var imageObj = new Image(width, height)
+let imageObj = new Image(width, height)
 
 //Function to play the video
 function get_video() {
