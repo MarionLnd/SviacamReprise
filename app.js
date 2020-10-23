@@ -20,6 +20,7 @@ io.on('connection', function (socket) {
   console.log("socket")
   socket.on('click',function(key){
     //If the type of key is a mouse
+    console.log("this is "+key);
     if (key.includes("mouse_")) {
       var mouse = robot.getMousePos()
       if (key == 'mouse_up'){

@@ -12,8 +12,8 @@ var MIN_HEIGHT = 50;
 
 // The blue rectangle
 var rect1 = new Konva.Rect({
-    x: stage.width() / 2,
-    y: stage.height() / 2,
+    x: 0,
+    y: stage.height() / 3,
     width: 50,
     height: 50,
     stroke: 'black',
@@ -125,10 +125,10 @@ var MIN_HEIGHT2 = 20;
 
 // The blue rectangle
 var rect2 = new Konva.Rect({
-    x: stage.width() / 3,
+    x: stage.width() - 50 ,
     y: stage.height() / 3,
-    width: 80,
-    height: 20,
+    width: 50,
+    height: 50,
     stroke: 'green',
     strokeWidth:0,
     visible: false,
@@ -299,7 +299,7 @@ $('#threshold').click(function () {
 });
 $('#threshold').click(function () {
   if (($(this).is(':checked'))) {
-      key = $("#select_rect2").val().toLowerCase();
+      key2 = $("#select_rect2").val().toLowerCase();
       // if points_value is empty (not dragged or transformed)
       if (Object.keys(points2).length === 0 && points2.constructor === Object) {
           points_value2 = {
