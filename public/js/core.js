@@ -7,8 +7,10 @@ function core() {
 
 	let rendering = false;
 
-	let width = 40;
-	let height = 30;
+	//let width = 40;
+	//let height = 30;
+	let width = webcam.width() / 10;
+	let height = webcam.height() / 10;
 
 	let width_img = width * 10;
 	let height_img = height * 10;
@@ -19,13 +21,13 @@ function core() {
 
 	let topLeft = [Infinity, Infinity]; // Position ?
 	let bottomRight = [0, 0]; // Position ?
-	//let bottomRight = [window.innerWidth - 300, window.innerHeight]; // Position ?
 
 	// start the animation from the video
 	let raf = (function () {
 		return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
 			function (anim) {
 				setTimeout(anim, 1000 / 60);
+				//setTimeout(anim, 100);
 			};
 	})();
 
@@ -61,23 +63,26 @@ function core() {
 		oldImage.src = imageObj.src
 		imageObj.src = webcam.toDataURL()
 
+		console.log(webcam)
+
 		if (!oldImage || !imageObj) {
 			return;
 		}
 
 		let vals = imageCompare.compare(imageObj, oldImage, width, height);
-		console.log(vals)
-		console.log("imageObj x : " + imageObj.x)
-		console.log("imageObj y : " + imageObj.y)
-		console.log("oldImage x : " + oldImage.x)
-		console.log("oldImage y : " + oldImage.y)
 		console.log(imageObj)
 		console.log(oldImage)
+		console.log(width)
+		console.log(height)
+		console.log(vals)
 		topLeft[0] = vals.topLeft[0] * 10;
 		topLeft[1] = vals.topLeft[1] * 10;
 
 		bottomRight[0] = vals.bottomRight[0] * 10;
 		bottomRight[1] = vals.bottomRight[1] * 10;
+
+		console.log(vals.topLeft)
+		console.log(vals.bottomRight)
 
 		// Position of the red zone
 		document.getElementById('movement').style.top = topLeft[1] + 'px';

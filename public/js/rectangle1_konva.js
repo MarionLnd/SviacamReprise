@@ -13,9 +13,9 @@ var MIN_HEIGHT = 1000;
 // The blue rectangle
 var rect1 = new Konva.Rect({
     x: 0,
-    y: stage.height() - 500,
+    y: stage.height() - MAX_HEIGHT,
     width: 400,
-    height: 500,
+    height: MAX_HEIGHT,
     stroke: 'blue',
     strokeWidth:0,
     visible: false,

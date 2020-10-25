@@ -49,12 +49,17 @@ function image_compare() {
 
 			// Waiting for the first image to load to start the comparaison
 			image1.onload = function() {
-				temp1Context.drawImage(image1, 0, 0, width, height);
-				temp2Context.drawImage(image2, 0, 0, width, height);
+				//temp1Context.clearRect(0, 0, 100000, 100000);
+				//temp2Context.clearRect(0, 0, 100000, 100000);
+
+				temp1Context.drawImage(image1, window.innerWidth / 100, window.innerHeight / 100, width, height);
+				temp2Context.drawImage(image2, window.innerWidth / 100, window.innerHeight / 100, width, height);
+				//temp1Context.drawImage(image1, 0, 0, width, height);
+				//temp2Context.drawImage(image2, 0, 0, width, height);
 			}
 					
 			for(let y = 0; y < height; y++) {
-				for(let x = 0; x <  width; x++) {
+				for(let x = 0; x < width; x++) {
 					let pixel1 = temp1Context.getImageData(x,y,1,1);
 					let pixel1Data = pixel1.data;
 
@@ -110,12 +115,12 @@ function image_compare() {
 		 * @return void.
 		 *
 		 */
-		function setTopLeft(x,y) {
+		function setTopLeft(x, y) {
 			if(x < topLeft[0] ) {
 				topLeft[0] = x;
 			}
 			if(y < topLeft[1]) {
-				topLeft[1] = [y];
+				topLeft[1] = y;
 			}
 		}
 
@@ -128,12 +133,12 @@ function image_compare() {
 		 * @return void.
 		 *
 		 */
-		function setBottomRight(x,y) {
+		function setBottomRight(x, y) {
 			if(x > bottomRight[0]) {
-				bottomRight[0] = [x];
+				bottomRight[0] = x;
 			}
 			if(y > bottomRight[1]) {
-				bottomRight[1] = [y];
+				bottomRight[1] = y;
 			}
 		}
 

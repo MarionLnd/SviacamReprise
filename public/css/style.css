@@ -5,6 +5,7 @@
 .row-eq{
 	display: flex;
 }
+
 .col-eq{
 	flex: 1;
 	background: #ccc;
@@ -12,11 +13,13 @@
     width: 400px;
     height: 300px
 }
+
 .threshold_container{
 	border : 1px solid black;
 }
+
 #threshold {
-	margin-top: 41px;
+	/*margin-top: 41px;*/
 }
 
 .threshold_label {
@@ -24,18 +27,17 @@
 }
 
 .blue {
-	border : 1px solid blue;
+	border: 1px solid blue;
 }
 
 .red {
-	border : 1px solid red;
+	border: 1px solid red;
 }
 
 h4 {
 	letter-spacing: 1px;
 	padding: 10px 0;
 }
-
 
 #movement {
 	position: absolute;
