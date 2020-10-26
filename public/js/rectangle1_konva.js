@@ -72,11 +72,11 @@ let tr = new Konva.Transformer({
 
 //Type of mouse for the rectangle
 rect1.on('mouseenter', function() {
-stage.container().style.cursor = 'move';
+    stage.container().style.cursor = 'move';
 });
 
 rect1.on('mouseleave', function() {
-stage.container().style.cursor = 'default';
+    stage.container().style.cursor = 'default';
 });
 
 //rect2
@@ -87,17 +87,17 @@ var key2;
 //Part linked to the rectangles
 var MIN_X2 = 1
 var MIN_Y2 = 1
-var MAX_WIDTH2 = 350;
-var MIN_WIDTH2 = 20;
-var MAX_HEIGHT2 = 200;
-var MIN_HEIGHT2 = 20;
+var MAX_WIDTH2 = window.innerWidth - 30;
+var MIN_WIDTH2 = 1000;
+var MAX_HEIGHT2 = window.innerHeight - 100;
+var MIN_HEIGHT2 = 1000;
 
 // The blue rectangle
 var rect2 = new Konva.Rect({
     x: stage.width() - 300,
-    y: stage.height() - MAX_HEIGHT,
+    y: stage.height() - MAX_HEIGHT2,
     width: 300,
-    height: MAX_HEIGHT,
+    height: MAX_HEIGHT2,
     stroke: 'green',
     strokeWidth:0,
     visible: false,
@@ -161,7 +161,6 @@ rect2.on('mouseleave', function() {
     stage.container().style.cursor = 'default';
 });
 
-
 // Start to show the rectangle of the Sensor 1 by default
 layer.add(rect1);
 layer.add(tr);
@@ -184,10 +183,10 @@ $('#threshold').click(function () {
         // if points_value is empty (not dragged or transformed)
         if (Object.keys(points).length === 0 && points.constructor === Object) {
             points_value = {
-                "x":rect1.x(),
-                "y":rect1.y(),
-                "width":rect1.width(),
-                "height":rect1.height()
+                "x": rect1.x(),
+                "y": rect1.y(),
+                "width": rect1.width(),
+                "height": rect1.height()
             }
         } else {
             points_value = points
@@ -197,9 +196,10 @@ $('#threshold').click(function () {
     }
 });
 
-/*$('#threshold').click(function () {
+$('#threshold').click(function () {
     if (($(this).is(':checked'))) {
-        key = $("#select_rect2").val().toLowerCase();
+        $("#select_rect2").onchange = newValue();
+        key2 = $("#select_rect2").val().toLowerCase();
         // if points_value is empty (not dragged or transformed)
         if (Object.keys(points2).length === 0 && points2.constructor === Object) {
             points_value2 = {
@@ -215,31 +215,8 @@ $('#threshold').click(function () {
     } else {
         points_value2 = {}
     }
-});*/
+});
 
-// Set the points of the rectangle when the button Threshold is clicked_
-/*$('#threshold_label_btn').click(function (e) {
-    e.preventDefault()
-    let checkboxThreshold = $('#threshold');
-
-    checkboxThreshold.prop("checked", true)
-
-    if (checkboxThreshold.is(':checked')) {
-        $('#threshold_label_btn').val("Désactiver la détection de mouvement")
-        key = $("#select_rect1").val().toLowerCase();
-        // if points_value is empty (not dragged or transformed)
-        if (Object.keys(points).length === 0 && points.constructor === Object) {
-            points_value = {
-                "x":rect1.x(),
-                "y":rect1.y(),
-                "width":rect1.width(),
-                "height":rect1.height()
-            }
-        } else {
-            points_value = points
-        }
-    } else {
-        points_value = {}
-    }
-
-});*/
+function newValue() {
+    key2 = $("#select_rect2").val().toLowerCase();
+}

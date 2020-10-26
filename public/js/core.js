@@ -1,5 +1,4 @@
 function core() {
-
 	// set all the used variables
 	let audio = document.getElementById('audio');
 
@@ -90,27 +89,60 @@ function core() {
 		//console.log(document.getElementById('movement'))
 
 		// Dimension of the red zone
-		let width_mvt = bottomRight[0] - topLeft[0]
+		/*let width_mvt = bottomRight[0] - topLeft[0]
 		let height_mvt = bottomRight[1] - topLeft[1]
 		document.getElementById('movement').style.width = width_mvt + 'px';
-		document.getElementById('movement').style.height = height_mvt + 'px';
+		document.getElementById('movement').style.height = height_mvt + 'px';*/
 
+		document.getElementById('movement').style.width = (bottomRight[0] - topLeft[0]) + 'px';
+		document.getElementById('movement').style.height = (bottomRight[1] - topLeft[1]) + 'px';
+
+		// Sensor 1
 		let x_top_right = points_value.x + points_value.width
 		let y_bottom_right = points_value.y + points_value.height
+		// Sensor 2
+		let x_top_right2 = points_value2.x + points_value2.width
+		let y_bottom_right2 = points_value2.y + points_value2.height
 
-		// Compare the points of the Konva square and the movement
+		console.log(x_top_right)
+		console.log(y_bottom_right)
+		console.log(x_top_right2)
+		console.log(x_top_right2)
+
+		// Compare the points of the Konva square (sensor 1) and the movement
 		if ((topLeft[0] >= points_value.x && topLeft[1] >= points_value.y
 			&& topLeft[0] <= x_top_right && topLeft[1] <= y_bottom_right)
 			||
 			(bottomRight[0] >= points_value.x && bottomRight[1] >= points_value.y
 				&& bottomRight[0] <= x_top_right && bottomRight[1] <= y_bottom_right)) {
-
+			$("#select_rect1").onchange = newValue1();
 			socket.emit('click', key);
 			socket.on('done', function (msg) {
 				movement_done = msg
 				audio.play();
 			})
 		}
+		// Compare the points of the Konva square (sensor 2) and the movement
+		if ((topLeft[0] >= points_value2.x && topLeft[1] >= points_value2.y
+			&& topLeft[0] <= x_top_right2 && topLeft[1] <= y_bottom_right2)
+			||
+			(bottomRight[0] >= points_value2.x && bottomRight[1] >= points_value2.y
+				&& bottomRight[0] <= x_top_right2 && bottomRight[1] <= y_bottom_right2)) {
+			$("#select_rect2").onchange = newValue2();
+			socket.emit('click', key2);
+			socket.on('done', function (msg) {
+				movement_done = msg
+				audio.play();
+			})
+		}
+	}
+
+	function newValue1() {
+		key = $("#select_rect1").val().toLowerCase();
+	}
+
+	function newValue2() {
+		key2 = $("#select_rect2").val().toLowerCase();
 	}
 
 	/*

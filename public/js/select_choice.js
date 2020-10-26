@@ -17,3 +17,7 @@ let max = all_choices.length
 for (let i = min; i < max; i++) {
     $(".select").append(`<option value=${all_choices[i]}>${all_choices[i]}</option>`)
 }
+
+// Choices by default
+document.getElementById("select_rect1").value = "MOUSE_LEFT";
+document.getElementById("select_rect2").value = "MOUSE_UP";
