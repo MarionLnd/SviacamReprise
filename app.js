@@ -18,18 +18,18 @@ app.get('/', (res) => {
 // Use robojs to press the key
 io.on('connection', function (socket) {
   console.log("socket")
-  socket.on('click',function(key){
+  socket.on('click', function(key) {
     //If the type of key is a mouse
     console.log("this is "+key);
     if (key.includes("mouse_")) {
-      var mouse = robot.getMousePos()
-      if (key == 'mouse_up'){
+      let mouse = robot.getMousePos()
+      if (key === 'mouse_up'){
         robot.moveMouseSmooth(mouse.x, mouse.y - 50);
-      } else if (key == 'mouse_down'){
+      } else if (key === 'mouse_down'){
         robot.moveMouseSmooth(mouse.x, mouse.y + 50);
-      }else if (key == 'mouse_left'){
+      }else if (key === 'mouse_left'){
         robot.moveMouseSmooth(mouse.x - 50, mouse.y);
-      }else if (key == 'mouse_right'){
+      }else if (key === 'mouse_right'){
         robot.moveMouseSmooth(mouse.x + 50, mouse.y);
       }
     //Id the type of key is key press
