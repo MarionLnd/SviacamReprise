@@ -128,6 +128,17 @@ function core() {
 			return;
 		}
 
+		try {
+			if (Object.keys(points_value2).length === 0 && points_value2.constructor === Object) {
+				// points_value of the square empty : no movement needed
+			} else {
+				render();
+			}
+		} catch (e) {
+			console.log(e);
+			return;
+		}
+
 		if (rendering === true) {
 			let anim = new Konva.Animation(function () {
 			}, layer)

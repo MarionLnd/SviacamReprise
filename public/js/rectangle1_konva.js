@@ -14,54 +14,13 @@ var MIN_HEIGHT = 1000;
 var rect1 = new Konva.Rect({
     x: 0,
     y: stage.height() - MAX_HEIGHT,
-    width: 400,
+    width: 300,
     height: MAX_HEIGHT,
     stroke: 'blue',
     strokeWidth:0,
     visible: false,
     name: 'rect1',
-    draggable: false,
-    // Set points when the rectangle is dragged 
-    dragBoundFunc: function(pos) {
-        var width = rect1.width() * rect1.scaleX();
-        var height = rect1.height() * rect1.scaleY();
-        var MAX_X = pos.x + width
-        var MAX_Y = pos.y + height
-
-        // Coté gauche de la page
-        if (pos.x < MIN_X) {
-            pos.x = MIN_X;
-        }
-
-        // Coté droit de la page
-        if (MAX_X > MAX_WIDTH) {
-            pos.x = MAX_WIDTH - width;
-        }
-
-        // En haut de la page
-        if (pos.y < MIN_Y) {
-            pos.y = MIN_Y;
-        }
-
-        // En bas de la page
-        if (MAX_Y > MAX_HEIGHT) {
-            pos.y = MAX_HEIGHT - height;
-        }
-
-        points = {
-            "x": pos.x,
-            "y":pos.y,
-            "width":width,
-            "height":height
-        }
-        //console.log(points)
-        //console.log(stage.width() / 2)
-        //console.log(MAX_X)
-        //console.log(MAX_WIDTH)
-        //console.log(MAX_Y)
-
-        return pos;
-    }
+    draggable: false
 });
 
 // Transformer of rect (the outside of the rectangle)
@@ -107,7 +66,6 @@ let tr = new Konva.Transformer({
           "width":newBoundBox.width,
           "height":newBoundBox.height
       }
-
       return newBoundBox;
     }
   });
@@ -121,13 +79,103 @@ rect1.on('mouseleave', function() {
 stage.container().style.cursor = 'default';
 });
 
-// Start to show the rectangle when the button Sensor 1 by default
-$('#select_rect1').removeAttr('disabled');
+//rect2
+var points_value2 = {}
+var points2 = {}
+var key2;
+
+//Part linked to the rectangles
+var MIN_X2 = 1
+var MIN_Y2 = 1
+var MAX_WIDTH2 = 350;
+var MIN_WIDTH2 = 20;
+var MAX_HEIGHT2 = 200;
+var MIN_HEIGHT2 = 20;
+
+// The blue rectangle
+var rect2 = new Konva.Rect({
+    x: stage.width() - 300,
+    y: stage.height() - MAX_HEIGHT,
+    width: 300,
+    height: MAX_HEIGHT,
+    stroke: 'green',
+    strokeWidth:0,
+    visible: false,
+    name: 'rect2',
+    draggable: false
+});
+
+// Transformer of rect (the outside of the rectangle)
+var tr2 = new Konva.Transformer({
+    boundBoxFunc: function(oldBoundBox, newBoundBox) {
+        var MAX_X2 = newBoundBox.x + newBoundBox.width
+        var MAX_Y2 = newBoundBox.y + newBoundBox.height
+
+        // Points set when the rectangle is descreased of increased
+        if (newBoundBox.x < MIN_X2) {
+            tr2.stopTransform();
+            newBoundBox.x = MIN_X;
+        }
+        if (MAX_X2 > MAX_WIDTH2) {
+            tr2.stopTransform();
+            newBoundBox.x = MAX_WIDTH2 - newBoundBox.width;
+        }
+        if (newBoundBox.y < MIN_Y2) {
+            tr2.stopTransform();
+            newBoundBox.y = MIN_Y2;
+        }
+        if (MAX_Y2 > MAX_HEIGHT2) {
+            tr2.stopTransform();
+            newBoundBox.y = MAX_HEIGHT2 - newBoundBox.height;
+        }
+
+        if (newBoundBox.width > MAX_WIDTH2) {
+            newBoundBox.width = MAX_WIDTH2;
+        }
+        if (newBoundBox.width < MIN_WIDTH2) {
+            newBoundBox.width = MIN_WIDTH2;
+        }
+        if (newBoundBox.height > MAX_HEIGHT2) {
+            newBoundBox.height = MAX_HEIGHT2;
+        }
+        if (newBoundBox.height < MIN_HEIGHT2) {
+            newBoundBox.height = MIN_HEIGHT2;
+        }
+
+        points2 = {
+            "x": newBoundBox.x,
+            "y":newBoundBox.y,
+            "width":newBoundBox.width,
+            "height":newBoundBox.height
+        }
+        return newBoundBox;
+    }
+});
+
+//Type of mouse for the rectangle
+rect2.on('mouseenter', function() {
+    stage.container().style.cursor = 'move';
+});
+
+rect2.on('mouseleave', function() {
+    stage.container().style.cursor = 'default';
+});
+
+
+// Start to show the rectangle of the Sensor 1 by default
 layer.add(rect1);
 layer.add(tr);
 tr.attachTo(rect1);
 rect1.show();
 tr.show()
+layer.draw();
+
+// Start to show the rectangle of the Sensor 2 by default
+layer.add(rect2);
+layer.add(tr2);
+tr2.attachTo(rect2);
+rect2.show();
+tr2.show()
 layer.draw();
 
 $('#threshold').click(function () {
@@ -148,6 +196,26 @@ $('#threshold').click(function () {
         points_value = {}
     }
 });
+
+/*$('#threshold').click(function () {
+    if (($(this).is(':checked'))) {
+        key = $("#select_rect2").val().toLowerCase();
+        // if points_value is empty (not dragged or transformed)
+        if (Object.keys(points2).length === 0 && points2.constructor === Object) {
+            points_value2 = {
+                "x": rect2.x(),
+                "y": rect2.y(),
+                "width": rect2.width(),
+                "height": rect2.height()
+            }
+
+        } else {
+            points_value2 = points2
+        }
+    } else {
+        points_value2 = {}
+    }
+});*/
 
 // Set the points of the rectangle when the button Threshold is clicked_
 /*$('#threshold_label_btn').click(function (e) {
