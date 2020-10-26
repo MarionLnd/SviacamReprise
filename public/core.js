@@ -92,7 +92,7 @@ function core() {
 			||
 			(bottomRight[0] >= points_value.x && bottomRight[1] >= points_value.y
 				&& bottomRight[0] <= x_top_right && bottomRight[1] <= y_bottom_right)) {
-
+			$("#select_rect1").onchange = newValue1();
 			socket.emit('click', key);
 			socket.on('done', function (msg) {
 				movement_done = msg
@@ -104,7 +104,7 @@ function core() {
 			||
 			(bottomRight[0] >= points_value2.x && bottomRight[1] >= points_value2.y
 				&& bottomRight[0] <= x_top_right2 && bottomRight[1] <= y_bottom_right2)) {
-	
+			$("#select_rect2").onchange = newValue2();
 			socket.emit('click', key2);
 			socket.on('done', function (msg) {
 				movement_done = msg
@@ -113,7 +113,16 @@ function core() {
 		}
 	
 	}
+	function newValue1(){
+  
+		key=$("#select_rect1").val().toLowerCase()
 	
+	}
+	function newValue2(){
+  
+		key2=$("#select_rect2").val().toLowerCase()
+	
+	}
 
 /*
  * The main rendering loop.

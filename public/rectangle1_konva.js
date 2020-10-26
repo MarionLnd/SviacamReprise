@@ -299,6 +299,7 @@ $('#threshold').click(function () {
 });
 $('#threshold').click(function () {
   if (($(this).is(':checked'))) {
+    $("#select_rect2").onchange = newValue();
       key2 = $("#select_rect2").val().toLowerCase();
       // if points_value is empty (not dragged or transformed)
       if (Object.keys(points2).length === 0 && points2.constructor === Object) {
@@ -316,3 +317,8 @@ $('#threshold').click(function () {
     points_value2 = {}
   }
 });
+function newValue(){
+  
+    key2=$("#select_rect2").val().toLowerCase()
+
+}
