@@ -316,7 +316,7 @@ $('#threshold').click(function () {
   } else {
     points_value2 = {}
   }
-});
+});  
 function newValue(){
   
     key2=$("#select_rect2").val().toLowerCase()
