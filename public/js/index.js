@@ -1,6 +1,6 @@
 // Set width and height of the stage and webcam
-let width = window.innerWidth - 300
-let height = window.innerHeight - 100
+let width = window.innerWidth - 500
+let height = window.innerHeight - 500
 
 $(window).resize(function() {
     //width = $( window ).width()
