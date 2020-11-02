@@ -226,7 +226,7 @@ stage.container().style.cursor = 'default';
 
 //Start to show the rectangle when the button Sensor 1 is clicked
 $('#rect1').click(function () {
-    if (($(this).is(':checked')) ){
+    if (($('#rect1').is(':checked')) ){
         $('#select_rect1').removeAttr('disabled');
         layer.add(rect1);
         layer.add(tr);
@@ -245,7 +245,7 @@ $('#rect1').click(function () {
 });
 //Start to show the rectangle when the button Sensor 1 is clicked
 $('#rect2').click(function () {
-  if ($(this).is(':checked')) {
+  if ($('#rect2').is(':checked')) {
       $('#select_rect2').removeAttr('disabled');
      
       layer.add(rect2);
@@ -264,6 +264,7 @@ $('#rect2').click(function () {
 //both 
 if (($('#rect1').is(':checked')) && ($('#rect2').is(':checked')) ){
   $('#select_rect1').removeAttr('disabled');
+  $('#select_rect2').removeAttr('disabled');
   layer.add(rect1);
   layer.add(tr);
   tr.attachTo(rect1);
@@ -280,7 +281,8 @@ if (($('#rect1').is(':checked')) && ($('#rect2').is(':checked')) ){
 }
 // Set the points of the reactangle when the button Threshold is clicked_
 $('#threshold').click(function () {
-    if (($(this).is(':checked'))) {
+  if (($('#threshold').is(':checked'))) {
+    if (($('#rect1').is(':checked'))) {
         key = $("#select_rect1").val().toLowerCase();
         // if points_value is empty (not dragged or transformed)
         if (Object.keys(points).length === 0 && points.constructor === Object) {
@@ -296,10 +298,14 @@ $('#threshold').click(function () {
     } else {
       points_value = {}
     }
+  }else{
+    points_value = {}
+  }
 });
 $('#threshold').click(function () {
-  if (($(this).is(':checked'))) {
-    $("#select_rect2").onchange = newValue();
+  if (($('#threshold').is(':checked'))) {
+  if (($('#rect2').is(':checked'))) {
+   
       key2 = $("#select_rect2").val().toLowerCase();
       // if points_value is empty (not dragged or transformed)
       if (Object.keys(points2).length === 0 && points2.constructor === Object) {
@@ -316,9 +322,7 @@ $('#threshold').click(function () {
   } else {
     points_value2 = {}
   }
-});  
-function newValue(){
-  
-    key2=$("#select_rect2").val().toLowerCase()
-
+}else{
+  points_value2 = {}
 }
+});  

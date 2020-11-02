@@ -54,7 +54,32 @@ function core() {
 	// 		console.log('hey')
 	// }, 1000);
 
-
+	const skinColorUpper = hue => new cv.Vec(hue, 0.8 * 255, 0.6 * 255);
+    const skinColorLower = hue => new cv.Vec(hue, 0.1 * 255, 0.05 * 255);
+    const makeHandMask = (img) => {
+		// filter by skin color
+		const imgHLS = img.cvtColor(cv.COLOR_BGR2HLS);
+		const rangeMask = imgHLS.inRange(skinColorLower(0), skinColorUpper(15));
+	  
+		// remove noise
+		const blurred = rangeMask.blur(new cv.Size(10, 10));
+		const thresholded = blurred.threshold(
+		  200,
+		  255,
+		  cv.THRESH_BINARY
+		);
+	  
+		return thresholded;
+	  };
+	  const getHandContour = (handMask) => {
+		const contours = handMask.findContours(
+		  cv.RETR_EXTERNAL,
+		  cv.CHAIN_APPROX_SIMPLE
+		);
+		// largest contour
+		return contours.sort((c0, c1) => c1.area - c0.area)[0];
+	  };
+	 
 	function render() {
 		oldImage = new Image(width_img, height_img);
 		oldImage.src = imageObj.src
@@ -63,7 +88,7 @@ function core() {
 		if (!oldImage || !imageObj) {
 			return;
 		}
-
+       
 		var vals = imageCompare.compare(imageObj, oldImage, width, height);
 		topLeft[0] = vals.topLeft[0] * 10;
 		topLeft[1] = vals.topLeft[1] * 10;
@@ -87,7 +112,7 @@ function core() {
 		y_bottom_right2 = points_value2.y + points_value2.height
 
 		// Compare the points of the Konva square and the movement
-		if ((topLeft[0] >= points_value.x && topLeft[1] >= points_value.y
+		if ((topLeft[0] <= points_value.x && topLeft[1] <= points_value.y
 			&& topLeft[0] <= x_top_right && topLeft[1] <= y_bottom_right)
 			||
 			(bottomRight[0] >= points_value.x && bottomRight[1] >= points_value.y

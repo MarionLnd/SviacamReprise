@@ -8,6 +8,8 @@ video.autoplay = true
 // Creation of Konva Stage
 var stage = new Konva.Stage({
     container: 'container',
+    x:0,
+    y:0,
     width: width,
     height: height
 });
