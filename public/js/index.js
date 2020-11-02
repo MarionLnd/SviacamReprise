@@ -1,4 +1,6 @@
 // Set width and height of the stage and webcam
+//var fp = require('fingerpose');
+
 let width = window.innerWidth - 300
 let height = window.innerHeight - 100
 
@@ -29,6 +31,16 @@ let webcam = new Konva.Image({
     height: height
 });
 layer.add(webcam);
+
+
+/*
+
+const model = await handpose.load();
+const predictions = await model.estimateHands(webcam, true);
+
+// using a minimum confidence of 7.5 (out of 10)
+const estimatedGestures = GE.estimate(predictions.landmarks, 7.5);
+*/
 
 let imageObj = new Image(width, height)
 
