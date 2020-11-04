@@ -47,7 +47,7 @@ const gestureStrings = {
 };
 
 async function main() {
-    const video = document.querySelector("#pose-video");
+    // const video = document.querySelector("#video-container");
     const canvas = document.querySelector("#pose-canvas");
     const ctx = canvas.getContext("2d");
     const resultLayer = document.querySelector("#pose-result");
@@ -65,23 +65,21 @@ async function main() {
     const estimateHands = async () => {
 
         // clear canvas overlay
-        ctx.clearRect(0, 0, video.width, video.height);
+        ctx.clearRect(0, 0, webcam.width, webcam.height);
         resultLayer.innerText = '';
 
         // get hand landmarks from video
         // Note: Handpose currently only detects one hand at a time
         // Therefore the maximum number of predictions is 1
-        const predictions = await model.estimateHands(video, true);
+        const predictions = await model.estimateHands(webcam, true);
 
         for(let i = 0; i < predictions.length; i++) {
-
             // draw colored dots at each predicted joint position
             for(let part in predictions[i].annotations) {
                 for(let point of predictions[i].annotations[part]) {
                     drawPoint(ctx, point[0], point[1], 3, landmarkColors[part]);
                 }
             }
-
             // now estimate gestures based on landmarks
             // using a minimum confidence of 7.5 (out of 10)
             const est = GE.estimate(predictions[i].landmarks, 7.5);
@@ -98,7 +96,7 @@ async function main() {
         }
 
         // ...and so on
-        setTimeout(() => { estimateHands(); }, 1000 / video.fps);
+        setTimeout(() => { estimateHands(); }, 1000 / webcam.fps);
     };
     estimateHands();
 
