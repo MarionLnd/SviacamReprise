@@ -41,14 +41,6 @@ h4 {
 
 #movement {
 	position: absolute;
-	/*top: 30;
-	left: 30;*/
 	border: 1px solid red;
 	background: rgba(255,0,0,0.3);
-}
-
-canvas {
-	/*transform: rotateY(180deg);
-	-webkit-transform:rotateY(180deg); /* Safari and Chrome */
-	/*-moz-transform:rotateY(180deg); /* Firefox */
 }
