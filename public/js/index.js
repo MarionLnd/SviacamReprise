@@ -62,16 +62,16 @@ async function main() {
     const model = await handpose.load();
     console.log("Handpose model loaded");
 
-    const estimateHands = async () => {
+        const estimateHands = async () => {
 
         // clear canvas overlay
-        ctx.clearRect(0, 0, webcam.width, webcam.height);
+        ctx.clearRect(0, 0, video.width, video.height);
         resultLayer.innerText = '';
 
         // get hand landmarks from video
         // Note: Handpose currently only detects one hand at a time
         // Therefore the maximum number of predictions is 1
-        const predictions = await model.estimateHands(webcam, true);
+        const predictions = await model.estimateHands(video, true);
 
         for(let i = 0; i < predictions.length; i++) {
             // draw colored dots at each predicted joint position
@@ -96,7 +96,7 @@ async function main() {
         }
 
         // ...and so on
-        setTimeout(() => { estimateHands(); }, 1000 / webcam.fps);
+        setTimeout(() => { estimateHands(); }, 1000 / video.fps);
     };
     estimateHands();
 
@@ -126,9 +126,7 @@ function get_video() {
                     console.log("Camera is ready");
                     main();
                 });
-
                 core = core()
-                main()
             })
             .catch(function (error) {
                 console.log("Webcam is not working")
@@ -136,5 +134,4 @@ function get_video() {
             })
     }
 }
-
 get_video()
