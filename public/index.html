@@ -10,91 +10,59 @@
 
 <body>
 <div class="container-fluid">
-    <h1 class="text-center mb-3">Pilotage gestuel de logiciels</h1>
-    <!--<div class="row">
-        <form class="form-group p-2">
-            <label for="modes">Sélectionner le mode souhaité</label>
+    <h1 id="main-title" class="text-center mt-2 mb-5">Pilotage gestuel de logiciels</h1>
+    <!-- CONTENT -->
+    <div class="row">
+        <!-- MODES -->
+        <!--<form id="modes_div" class="form-group col-2">
+            <h4 class="text-center">MODE</h4>
+            <label for="modes">Sélectionner le mode souhaité :</label>
             <select class="form-control" id="modes">
+                <option id="mode_0" value="empty">-</option>
                 <option id="mode_1" value="presentation">Mode présentation</option>
                 <option id="mode_2" value="navigation">Mode navigation</option>
                 <option id="mode_3" value="drawing">Mode dessin</option>
             </select>
-        </form>
-    </div>
-    <div class="row align-items-center row-eq">-->
-    <div class="row justify-content-center align-content-center">
-        <div class="col p-0">
-            <button class="btn btn-outline-dark">Activer sensor 1</button>
+        </form>-->
+
+        <!-- DETECTION ZONES -->
+        <div id="sensor1_div" class="text-center col-3 pl-5">
+            <h3>Les zones de détections (bleues)</h3>
+            <p class="pb-2">
+                Vous pouvez sélectionner quel évènement déclencher pour une zone en particulier.
+            </p>
+            <!--<button class="btn btn-outline-dark" id="btn-sensor1">Activer sensor 1</button>-->
+            <h5>Sensor 1 (gauche)</h5>
             <select id="select_rect1" class="select form-control"></select>
-        </div>
-        <div class="col" id="video-container"></div>
-        <div id="movement"></div>
-        <div class="col p-0">
-            <button class="btn btn-outline-dark">Activer sensor 2</button>
+            <br>
+            <!--<button class="btn btn-outline-dark" id="btn-sensor2">Activer sensor 2</button>-->
+            <h5>Sensor 2 (droite)</h5>
             <select id="select_rect2" class="select form-control"></select>
         </div>
-    </div>
-    <div class="row justify-content-center align-content-center p-0">
-        <form id="threshold_form">
-            <div class="p-0">
-                <input id="threshold" class="form-check-input" type="checkbox" name="threshold" value="1">
-                <label class="" for="threshold">Set Threshold</label>
-            </div>
-            <!--<input id="threshold" class="form-check-input" type="checkbox" name="threshold" value="1">
-            <label class="btn btn-outline-dark" for="threshold">Activer la détection de mouvement</label>-->
 
-        </form>
-    </div>
+        <!-- WEBCAM AND ZONES OF MOVEMENT -->
+        <div class="row-eq" id="video-container"></div>
+        <div id="movement"></div>
 
-
-        <!--<div class="col-md-3 col-eq threshold_container">
-            <p>
-                Une fois que vous avez activé les fenêtres de détection, vous pouvez cocher l'élément suivant afin de sauvegarder vos mouvements.
-            </p>
-            <form id="threshold_form">
+        <!-- SET THRESHOLD - ACTIVE MOVEMENT DETECTION -->
+        <div id="threshold_div" class="col-3 p-0 ml-5 text-center">
+            <form id="threshold_form" class="form-group">
+                <h3 class="pb-2">Activer la détection de mouvement (rouge)</h3>
                 <div class="form-check">
-                    <input id="threshold" class="form-check-input" type="checkbox" name="threshold" value="1">
-                    <label class="form-check-label threshold_label " for="threshold">Set Threshold</label>
+                    <input id="threshold" class="form-check-input pl-1" type="checkbox" name="threshold" value="1">
+                    <label class="form-check-label" for="threshold">Activer la détection</label>
                 </div>
             </form>
         </div>
-
-    </div>-->
-    <!--<div class="row">
-        <form class="col-md-6 col-eq blue" id="sensor1_form">
-            <div class="form-check">
-                <h4 class="text-center">Fenêtre de détection 1</h4>
-                <p>
-                    Il s'agit de la première fenêtre de détection: la zone se situera sur la gauche de la caméra et concernera les mouvements de gauche
-                </p>
-                <input id="rect1" type="checkbox" class="form-check-input" value="1" checked>
-                <label class="form-check-label" for="rect1">Activer la fenêtre de détection 1</label>
-                <div class="form-group">
-                    <select id="select_rect1" class="select form-control"></select>
-                </div>
-            </div>
-        </form>
-        <form class="col-md-6 col-eq red" id="sensor2_form">
-            <div class="form-check">
-                <h4 class="text-center">Fenêtre de détection 2</h4>
-                <p>
-                    Il s'agit de la deuxième fenêtre de détection: la zone se situera sur la gauche de la caméra et concernera les mouvements de droite
-                </p>
-                <input id="rect2" type="checkbox" class="form-check-input" value="1">
-                <label class="form-check-label" for="rect2">Activer la fenêtre de détection 2</label>
-                <div class="form-group">
-                    <select id="select_rect2" class="select form-control" disabled></select>
-                </div>
-            </div>
-        </form>
-    </div>-->
+        <!--<div id="sensors_div" class="col"></div>-->
+    </div>
+</div>
 
 <audio id="audio" src="sound/mouse_click.mp3"></audio>
 
 <script src="konva/konva.js"></script>
 <script src="socket.io-client/dist/socket.io.js"></script>
 <script src="jquery/dist/jquery.js"></script>
-<!-- <script type="text/javascript" src="rectangles_konva.js"></script> -->
 <script type="text/javascript" src="js/imageCompare.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/index.js"></script>

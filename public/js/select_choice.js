@@ -1,4 +1,4 @@
-let choices = ["_", "MOUSE_UP", "MOUSE_DOWN", "MOUSE_LEFT", "MOUSE_RIGHT",
+let choices = ["-", "MOUSE_UP", "MOUSE_DOWN", "MOUSE_LEFT", "MOUSE_RIGHT",
  "ENTER", "ESCAPE", "SPACE", "TAB", "SHIFT", "CONTROL",
  "ALT", "UP", "DOWN", "LEFT", "RIGHT"]
 
@@ -19,5 +19,5 @@ for (let i = min; i < max; i++) {
 }
 
 // Choices by default
-document.getElementById("select_rect1").value = "MOUSE_LEFT";
-document.getElementById("select_rect2").value = "MOUSE_UP";
+//document.getElementById("select_rect1").value = "MOUSE_LEFT";
+//document.getElementById("select_rect2").value = "MOUSE_UP";

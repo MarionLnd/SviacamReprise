@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const app = express()
-var robot = require("robotjs");
+let robot = require("robotjs");
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
