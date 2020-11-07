@@ -48,14 +48,12 @@ h4 {
 .layer {
 	position: absolute;
 	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+	left: 10%;
+	width: 80%;
+	height: 80%;
+	border: 2px solid transparent;
 }
 
-#pose-video {
-	transform: scaleX(-1);
-}
 
 #pose-result {
 	font-size: 100px;

@@ -47,7 +47,6 @@ const gestureStrings = {
 };
 
 async function main() {
-    // const video = document.querySelector("#video-container");
     const canvas = document.querySelector("#pose-canvas");
     const ctx = canvas.getContext("2d");
     const resultLayer = document.querySelector("#pose-result");
@@ -65,7 +64,7 @@ async function main() {
         const estimateHands = async () => {
 
         // clear canvas overlay
-        ctx.clearRect(0, 0, video.width, video.height);
+        //ctx.clearRect(0, 0, video.width, video.height);
         resultLayer.innerText = '';
 
         // get hand landmarks from video
@@ -98,7 +97,7 @@ async function main() {
         // ...and so on
         setTimeout(() => { estimateHands(); }, 1000 / video.fps);
     };
-    estimateHands();
+    await estimateHands();
 
     console.log("Starting predictions");
 }
