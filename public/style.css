@@ -4,16 +4,18 @@
 
 .row-eq{
 	display: flex;
+	margin-left: 100px;
 }
 .col-eq{
 	flex: 1;
 	background: #ccc;
 	margin: 10px;
     width: 400px;
-    height: 300px
+	height: 300px;
+	
 }
 .threshold_container{
-	border : 1px solid black;
+	border : 1px solid rgb(13, 206, 87);
 }
 #threshold {
 	margin-top: 41px;
@@ -39,10 +41,11 @@ h4 {
 
 #movement {
 	position: absolute;
-	top: 30;
-	left: 30;
-	border: 1px solid red;
+	
+	
+	border: 1px solid green;
 	background: rgba(255,0,0,0.3);
+	margin-left: 100px;
 }
 
 canvas {
@@ -51,4 +54,5 @@ canvas {
 /*	-moz-transform:rotateY(180deg); /* Firefox */
 
 }
+
 
