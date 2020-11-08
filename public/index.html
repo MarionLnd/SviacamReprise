@@ -25,38 +25,38 @@
             </select>
         </form>-->
 
-        <!-- DETECTION ZONES -->
-
-
         <!-- WEBCAM AND ZONES OF MOVEMENT -->
         <div class="row-eq" id="video-container"></div>
         <div id="movement"></div>
 
-        <div id="sensor1_div" class="text-center col-3 pl-5">
-            <h3>Les zones de détections (bleues)</h3>
-            <p class="pb-2">
+        <!-- DETECTION ZONES -->
+        <div id="sensor1_div" class="col-4 pl-5">
+            <h3 class="title-blue-zone text-center">Les zones de détections (bleues)</h3>
+            <p class="pb-2 text-center">
                 Vous pouvez sélectionner quel évènement déclencher pour une zone en particulier.
             </p>
-            <!--<button class="btn btn-outline-dark" id="btn-sensor1">Activer sensor 1</button>-->
-            <h5>Sensor 1 (gauche)</h5>
-            <select id="select_rect1" class="select form-control"></select>
+
+            <h5 class="text-center">Sensor 1 (gauche)</h5>
+            <input type="button" class="btn text-left mb-1" id="btn1" onclick="changeS1()" value="Sensor 1 désactivé" style="background-color: blue; color: white;" />
+            <select id="select_rect1" class="select form-control" disabled></select>
+
             <br>
-            <!--<button class="btn btn-outline-dark" id="btn-sensor2">Activer sensor 2</button>-->
-            <h5>Sensor 2 (droite)</h5>
-            <select id="select_rect2" class="select form-control"></select>
+
+            <h5 class="text-center">Sensor 2 (droite)</h5>
+            <input type="button" class="btn text-left mb-1" id="btn2" onclick="changeS2()" value="Sensor 2 désactivé" style="background-color: blue; color: white;"/>
+            <select id="select_rect2" class="select form-control" disabled></select>
         </div>
 
         <!-- SET THRESHOLD - ACTIVE MOVEMENT DETECTION -->
-        <div id="threshold_div" class="col-3 p-0 ml-5 text-center">
+        <div id="threshold_div" class="col-3 ml-3 text-center" style="border-left: 1px solid black;">
             <form id="threshold_form" class="form-group">
-                <h3 class="pb-2">Activer la détection de mouvement (rouge)</h3>
+                <h3 class="pb-2 title-red-zone">Activer la détection de mouvement (rouge)</h3>
                 <div class="form-check">
                     <input id="threshold" class="form-check-input pl-1" type="checkbox" name="threshold" value="1">
                     <label class="form-check-label" for="threshold">Activer la détection</label>
                 </div>
             </form>
         </div>
-        <!--<div id="sensors_div" class="col"></div>-->
     </div>
 </div>
 

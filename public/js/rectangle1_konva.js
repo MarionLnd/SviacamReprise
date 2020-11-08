@@ -182,21 +182,80 @@ $("#modes").change(function(e) {
     }
 })*/
 
-// Start to show the rectangle of the Sensor 1 by default
-layer.add(rect1);
-layer.add(tr);
-tr.attachTo(rect1);
-rect1.show();
-tr.show()
-layer.draw();
+// Start to show the rectangle when the button Sensor 1 is clicked and change value of button
+function changeS1() {
+    if (document.getElementById("btn1").value === "Sensor 1 désactivé") {
+        document.getElementById("btn1").value = "Sensor 1 activé";
+        document.getElementById("btn1").style.backgroundColor= "green";
+        document.getElementById("btn1").style.color= "white";
+        $('#select_rect1').removeAttr('disabled');
+        layer.add(rect1);
+        layer.add(tr);
+        tr.attachTo(rect1);
+        rect1.show();
+        tr.show()
 
-// Start to show the rectangle of the Sensor 2 by default
-layer.add(rect2);
-layer.add(tr2);
-tr2.attachTo(rect2);
-rect2.show();
-tr2.show()
-layer.draw();
+        layer.draw();
+    } else {
+        document.getElementById("btn1").value = "Sensor 1 désactivé";
+        document.getElementById("btn1").style.backgroundColor= "blue";
+        document.getElementById("btn1").style.color= "white";
+        $('#select_rect1').attr('disabled', true);
+        rect1.hide();
+        tr.hide();
+
+        layer.draw();
+    }
+}
+
+
+// Start to show the rectangle when the button Sensor 2 is clicked and change value of button
+function changeS2() {
+    if (document.getElementById("btn2").value === "Sensor 2 désactivé") {
+        document.getElementById("btn2").value = "Sensor 2 activé";
+        document.getElementById("btn2").style.backgroundColor= "green";
+        document.getElementById("btn2").style.color= "white";
+
+        $('#select_rect2').removeAttr('disabled');
+        layer.add(rect2);
+        layer.add(tr2);
+        tr2.attachTo(rect2);
+        rect2.show();
+        tr2.show()
+
+        layer.draw();
+    } else {
+        document.getElementById("btn2").value = "Sensor 2 désactivé";
+        document.getElementById("btn2").style.backgroundColor= "blue";
+        document.getElementById("btn2").style.color= "white";
+
+        $('#select_rect2').attr('disabled', true);
+        rect2.hide();
+        tr2.hide();
+
+        layer.draw();
+    }
+}
+
+
+// Both
+if ((document.getElementById("btn1").value == "Sensor 1 activé") && (document.getElementById("btn2").value = "Sensor 2 activé") ){
+    $('#select_rect1').removeAttr('disabled');
+    $('#select_rect2').removeAttr('disabled');
+    layer.add(rect1);
+    layer.add(tr);
+    tr.attachTo(rect1);
+    rect1.show();
+    tr.show()
+
+    layer.add(rect2);
+    layer.add(tr2);
+    tr2.attachTo(rect2);
+    rect2.show();
+    tr2.show()
+
+    layer.draw();
+}
 
 
 $('#threshold').click(function () {

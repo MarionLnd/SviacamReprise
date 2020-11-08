@@ -6,37 +6,14 @@
 	display: flex;
 }
 
-.col-eq{
-	flex: 1;
-	background: #ccc;
-	margin: 10px;
-    width: 400px;
-    height: 300px
+.title-blue-zone {
+	color: #1E90FF;
+	text-decoration: underline;
 }
 
-.threshold_container{
-	border : 1px solid black;
-}
-
-#threshold {
-	/*margin-top: 41px;*/
-}
-
-.threshold_label {
-	margin-top: 35px;
-}
-
-.blue {
-	border: 1px solid blue;
-}
-
-.red {
-	border: 1px solid red;
-}
-
-h4 {
-	letter-spacing: 1px;
-	padding: 10px 0;
+.title-red-zone {
+	color: #DD2D2D;
+	text-decoration: underline;
 }
 
 #movement {
