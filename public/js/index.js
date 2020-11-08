@@ -1,11 +1,8 @@
 // Set width and height of the stage and webcam
-let width = window.innerWidth - 300
-let height = window.innerHeight - 100
+let width = 700
+let height = 600
 
-$(window).resize(function() {
-    //width = $( window ).width()
-    //height = $( window ).height()
-})
+let titleHeight = $("#main-title").height() + parseInt($("#main-title").css("marginBottom").replaceAll("px", ""))
 
 let video = document.createElement('video')
 video.autoplay = true

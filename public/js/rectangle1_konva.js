@@ -1,21 +1,21 @@
-var points_value = {}
-var points = {}
-var key;
+let points_value = {}
+let points = {}
+let key;
 
 //Part linked to the rectangles
-var MIN_X = 2
-var MIN_Y = 2 
-var MAX_WIDTH = window.innerWidth - 30;
-var MIN_WIDTH = 1000;
-var MAX_HEIGHT = window.innerHeight - 100;
-var MIN_HEIGHT = 1000;
+let MIN_X = 2
+let MIN_Y = 2
+let MAX_WIDTH = 700;
+let MIN_WIDTH = 150;
+let MAX_HEIGHT = 600;
+let MIN_HEIGHT = 400;
 
 // The blue rectangle
-var rect1 = new Konva.Rect({
+let rect1 = new Konva.Rect({
     x: 0,
-    y: stage.height() / 3,
-    width: 300,
-    height: MAX_HEIGHT / 3,
+    y: stage.height() - (MAX_HEIGHT/2),
+    width: 150,
+    height: 300,
     stroke: 'blue',
     strokeWidth:0,
     visible: false,
@@ -80,24 +80,24 @@ rect1.on('mouseleave', function() {
 });
 
 //rect2
-var points_value2 = {}
-var points2 = {}
-var key2;
+let points_value2 = {}
+let points2 = {}
+let key2;
 
 //Part linked to the rectangles
-var MIN_X2 = 1
-var MIN_Y2 = 1
-var MAX_WIDTH2 = window.innerWidth - 30;
-var MIN_WIDTH2 = 1000;
-var MAX_HEIGHT2 = window.innerHeight - 100;
-var MIN_HEIGHT2 = 1000;
+let MIN_X2 = 1
+let MIN_Y2 = 1
+let MAX_WIDTH2 = 700;
+let MIN_WIDTH2 = 150;
+let MAX_HEIGHT2 = 600;
+let MIN_HEIGHT2 = 400;
 
 // The blue rectangle
-var rect2 = new Konva.Rect({
-    x: stage.width() - 300,
-    y: stage.height() / 3,
-    width: 300,
-    height: MAX_HEIGHT2 / 3,
+let rect2 = new Konva.Rect({
+    x: stage.width() - 150,
+    y: stage.height() - (MAX_HEIGHT2/2),
+    width: 150,
+    height: 300,
     stroke: 'green',
     strokeWidth:0,
     visible: false,
@@ -105,11 +105,13 @@ var rect2 = new Konva.Rect({
     draggable: false
 });
 
+//console.log(rect2.attrs)
+
 // Transformer of rect (the outside of the rectangle)
-var tr2 = new Konva.Transformer({
+let tr2 = new Konva.Transformer({
     boundBoxFunc: function(oldBoundBox, newBoundBox) {
-        var MAX_X2 = newBoundBox.x + newBoundBox.width
-        var MAX_Y2 = newBoundBox.y + newBoundBox.height
+        let MAX_X2 = newBoundBox.x + newBoundBox.width
+        let MAX_Y2 = newBoundBox.y + newBoundBox.height
 
         // Points set when the rectangle is descreased of increased
         if (newBoundBox.x < MIN_X2) {
@@ -161,21 +163,100 @@ rect2.on('mouseleave', function() {
     stage.container().style.cursor = 'default';
 });
 
-// Start to show the rectangle of the Sensor 1 by default
-layer.add(rect1);
-layer.add(tr);
-tr.attachTo(rect1);
-rect1.show();
-tr.show()
-layer.draw();
+let modeVal;
+/*
+$("#modes").change(function(e) {
+    modeVal = e.target.options[e.target.options.selectedIndex].value
+    if(modeVal === "presentation") {
+        console.log("mode presentation")
+        $("#btn-sensor1").prop("disabled", true)
+        $("#btn-sensor2").prop("disabled", true)
+    } else if(modeVal === "drawing") {
+        console.log("mode dessin")
+        $("#btn-sensor1").prop("disabled", false)
+        $("#btn-sensor2").prop("disabled", false)
+    } else if(modeVal === "navigation") {
+        console.log("mode navigation")
+        $("#btn-sensor1").prop("disabled", false)
+        $("#btn-sensor2").prop("disabled", false)
+    }
+})*/
 
-// Start to show the rectangle of the Sensor 2 by default
-layer.add(rect2);
-layer.add(tr2);
-tr2.attachTo(rect2);
-rect2.show();
-tr2.show()
-layer.draw();
+// Start to show the rectangle when the button Sensor 1 is clicked and change value of button
+function changeS1() {
+    if (document.getElementById("btn1").value === "Sensor 1 désactivé") {
+        document.getElementById("btn1").value = "Sensor 1 activé";
+        document.getElementById("btn1").style.backgroundColor= "green";
+        document.getElementById("btn1").style.color= "white";
+        $('#select_rect1').removeAttr('disabled');
+        layer.add(rect1);
+        layer.add(tr);
+        tr.attachTo(rect1);
+        rect1.show();
+        tr.show()
+
+        layer.draw();
+    } else {
+        document.getElementById("btn1").value = "Sensor 1 désactivé";
+        document.getElementById("btn1").style.backgroundColor= "blue";
+        document.getElementById("btn1").style.color= "white";
+        $('#select_rect1').attr('disabled', true);
+        rect1.hide();
+        tr.hide();
+
+        layer.draw();
+    }
+}
+
+
+// Start to show the rectangle when the button Sensor 2 is clicked and change value of button
+function changeS2() {
+    if (document.getElementById("btn2").value === "Sensor 2 désactivé") {
+        document.getElementById("btn2").value = "Sensor 2 activé";
+        document.getElementById("btn2").style.backgroundColor= "green";
+        document.getElementById("btn2").style.color= "white";
+
+        $('#select_rect2').removeAttr('disabled');
+        layer.add(rect2);
+        layer.add(tr2);
+        tr2.attachTo(rect2);
+        rect2.show();
+        tr2.show()
+
+        layer.draw();
+    } else {
+        document.getElementById("btn2").value = "Sensor 2 désactivé";
+        document.getElementById("btn2").style.backgroundColor= "blue";
+        document.getElementById("btn2").style.color= "white";
+
+        $('#select_rect2').attr('disabled', true);
+        rect2.hide();
+        tr2.hide();
+
+        layer.draw();
+    }
+}
+
+
+// Both
+if ((document.getElementById("btn1").value == "Sensor 1 activé") && (document.getElementById("btn2").value = "Sensor 2 activé") ){
+    $('#select_rect1').removeAttr('disabled');
+    $('#select_rect2').removeAttr('disabled');
+    layer.add(rect1);
+    layer.add(tr);
+    tr.attachTo(rect1);
+    rect1.show();
+    tr.show()
+
+    layer.add(rect2);
+    layer.add(tr2);
+    tr2.attachTo(rect2);
+    rect2.show();
+    tr2.show()
+
+    layer.draw();
+}
+
 
 $('#threshold').click(function () {
     if ($(this).is(':checked')) {
@@ -183,11 +264,12 @@ $('#threshold').click(function () {
         // if points_value is empty (not dragged or transformed)
         if (Object.keys(points).length === 0 && points.constructor === Object) {
             points_value = {
-                "x": rect1.x(),
-                "y": rect1.y(),
+                "x": rect1.x(),// + sensor1DivWidth,
+                "y": rect1.y() + titleHeight,
                 "width": rect1.width(),
                 "height": rect1.height()
             }
+            console.log(points_value)
         } else {
             points_value = points
         }
@@ -203,8 +285,8 @@ $('#threshold').click(function () {
         // if points_value is empty (not dragged or transformed)
         if (Object.keys(points2).length === 0 && points2.constructor === Object) {
             points_value2 = {
-                "x": rect2.x(),
-                "y": rect2.y(),
+                "x": rect2.x(),// + sensor1DivWidth,
+                "y": rect2.y() + titleHeight,
                 "width": rect2.width(),
                 "height": rect2.height()
             }

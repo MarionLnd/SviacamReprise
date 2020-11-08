@@ -49,21 +49,20 @@ function image_compare() {
 
 			// Waiting for the first image to load to start the comparaison
 			image1.onload = function() {
-				//temp1Context.clearRect(0, 0, 100000, 100000);
-				//temp2Context.clearRect(0, 0, 100000, 100000);
+				temp1Context.clearRect(0,0,100000,100000);
+				temp2Context.clearRect(0,0,100000,100000);
 
-				temp1Context.drawImage(image1, window.innerWidth / 100, window.innerHeight / 100, width, height);
-				temp2Context.drawImage(image2, window.innerWidth / 100, window.innerHeight / 100, width, height);
-				//temp1Context.drawImage(image1, 0, 0, width, height);
-				//temp2Context.drawImage(image2, 0, 0, width, height);
+				//tempContext.drawImage(image2, width of the div on the left of the camera, height of the title, width, height);
+				temp1Context.drawImage(image1, 0, titleHeight / 10, width, height);
+				temp2Context.drawImage(image2, 0, titleHeight / 10, width, height);
 			}
 					
 			for(let y = 0; y < height; y++) {
 				for(let x = 0; x < width; x++) {
-					let pixel1 = temp1Context.getImageData(x,y,1,1);
+					let pixel1 = temp1Context.getImageData(x, y,1,1);
 					let pixel1Data = pixel1.data;
 
-					let pixel2 = temp2Context.getImageData(x,y,1,1);
+					let pixel2 = temp2Context.getImageData(x, y,1,1);
 					let pixel2Data = pixel2.data;
 					
 					if(comparePixel(pixel1Data, pixel2Data) === false) {
@@ -72,6 +71,10 @@ function image_compare() {
 					}					
 				}
 			}
+
+			/*console.log(topLeft)
+			console.log(bottomRight)
+			 */
 
 			return {
 				'topLeft': topLeft,
