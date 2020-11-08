@@ -3,10 +3,6 @@ let width = 700
 let height = 600
 
 let titleHeight = $("#main-title").height() + parseInt($("#main-title").css("marginBottom").replaceAll("px", ""))
-let sensor1DivWidth = Math.round($("#sensor1_div").width())
-    + parseInt($("#sensor1_div").css("paddingLeft").replaceAll("px", ""))
-    + parseInt($("#sensor1_div").css("paddingRight").replaceAll("px", ""))
-    + 80
 
 let video = document.createElement('video')
 video.autoplay = true

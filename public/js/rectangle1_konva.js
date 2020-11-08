@@ -5,7 +5,7 @@ let key;
 //Part linked to the rectangles
 let MIN_X = 2
 let MIN_Y = 2
-let MAX_WIDTH = 700// + sensor1DivWidth;
+let MAX_WIDTH = 700;
 let MIN_WIDTH = 150;
 let MAX_HEIGHT = 600;
 let MIN_HEIGHT = 400;
@@ -87,7 +87,7 @@ let key2;
 //Part linked to the rectangles
 let MIN_X2 = 1
 let MIN_Y2 = 1
-let MAX_WIDTH2 = 700// + sensor1DivWidth;
+let MAX_WIDTH2 = 700;
 let MIN_WIDTH2 = 150;
 let MAX_HEIGHT2 = 600;
 let MIN_HEIGHT2 = 400;
@@ -198,7 +198,6 @@ rect2.show();
 tr2.show()
 layer.draw();
 
-console.log(titleHeight)
 
 $('#threshold').click(function () {
     if ($(this).is(':checked')) {
@@ -206,7 +205,7 @@ $('#threshold').click(function () {
         // if points_value is empty (not dragged or transformed)
         if (Object.keys(points).length === 0 && points.constructor === Object) {
             points_value = {
-                "x": rect1.x() + sensor1DivWidth,
+                "x": rect1.x(),// + sensor1DivWidth,
                 "y": rect1.y() + titleHeight,
                 "width": rect1.width(),
                 "height": rect1.height()
@@ -227,7 +226,7 @@ $('#threshold').click(function () {
         // if points_value is empty (not dragged or transformed)
         if (Object.keys(points2).length === 0 && points2.constructor === Object) {
             points_value2 = {
-                "x": rect2.x() + sensor1DivWidth,
+                "x": rect2.x(),// + sensor1DivWidth,
                 "y": rect2.y() + titleHeight,
                 "width": rect2.width(),
                 "height": rect2.height()

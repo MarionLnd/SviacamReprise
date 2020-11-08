@@ -53,14 +53,12 @@ function image_compare() {
 				temp2Context.clearRect(0,0,100000,100000);
 
 				//tempContext.drawImage(image2, width of the div on the left of the camera, height of the title, width, height);
-				temp1Context.drawImage(image1, sensor1DivWidth / 10, titleHeight / 10, width, height);
-				temp2Context.drawImage(image2, sensor1DivWidth / 10, titleHeight / 10, width, height);
+				temp1Context.drawImage(image1, 0, titleHeight / 10, width, height);
+				temp2Context.drawImage(image2, 0, titleHeight / 10, width, height);
 			}
 					
 			for(let y = 0; y < height; y++) {
-			//for(let y = titleHeight / 10; y < height; y++) {
 				for(let x = 0; x < width; x++) {
-				//for(let x = sensor1DivWidth / 10; x < width; x++) {
 					let pixel1 = temp1Context.getImageData(x, y,1,1);
 					let pixel1Data = pixel1.data;
 
