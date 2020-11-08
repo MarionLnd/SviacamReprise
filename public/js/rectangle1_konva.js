@@ -205,6 +205,7 @@ function changeS1() {
         tr.hide();
 
         layer.draw();
+        points_value = points
     }
 }
 
@@ -234,6 +235,7 @@ function changeS2() {
         tr2.hide();
 
         layer.draw();
+        points_value2 = points2
     }
 }
 

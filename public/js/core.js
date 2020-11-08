@@ -94,7 +94,13 @@ function core() {
 			socket.emit('click', key);
 			socket.on('done', function (msg) {
 				movement_done = msg
-				audio.play();
+				if(document.getElementById("btn1").value === "Sensor 1 activé"){
+					console.log(document.getElementById("btn1").value);
+					audio.play();
+				}else{
+					audio.pause();
+				}
+				
 			})
 		}
 		// Compare the points of the Konva square (sensor 2) and the movement
@@ -108,7 +114,11 @@ function core() {
 			socket.emit('click', key2);
 			socket.on('done', function (msg) {
 				movement_done = msg
-				audio.play();
+				if(document.getElementById("btn2").value === "Sensor 2 activé"){
+					audio.play();
+				}else{
+					audio.pause();
+				}
 			})
 		}
 	}
