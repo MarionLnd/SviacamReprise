@@ -84,7 +84,7 @@ function core() {
 		// Position of the red zone
 		document.getElementById('movement').style.top = topLeft[1] + 'px';
 		if(topLeft[0] >= webcamPositionX + 400 ) {
-			document.getElementById('movement').style.left = topLeft[0] - 100 + 'px';
+			document.getElementById('movement').style.left = topLeft[0] - 180 + 'px';
 		} else {
 			document.getElementById('movement').style.left = topLeft[0] + 'px';
 		}
