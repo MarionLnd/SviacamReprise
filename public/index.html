@@ -22,8 +22,7 @@
       <form class="col-md-3 col-eq blue" id="buttons">
           <div class="form-check">
             <h4>Sensor 1</h4>
-            <input id="rect1" type="checkbox" class="form-check-input" value="1">
-            <label class="form-check-label" for="rect1">Enable Sensor 1
+            <input type="button" class="btn btn-outline-dark" id="btn1" onclick="changeS1()" value="Sensor 1 désactivé"/>
             <div class="form-group">
               <select id="select_rect1" class="select form-control" disabled></select>
             </div>
@@ -32,8 +31,7 @@
       <form class="col-md-3 col-eq red" id="buttons">
           <div class="form-check">
             <h4>Sensor 2</h4>
-            <input id="rect2" type="checkbox" class="form-check-input" value="1">
-            <label class="form-check-label" for="rect2">Enable Sensor 2
+            <input type="button" class="btn btn-outline-dark" id="btn2" onclick="changeS2()" value="Sensor 2 désactivé"/>
             <div class="form-group">
               <select id="select_rect2" class="select form-control" disabled></select>
             </div>

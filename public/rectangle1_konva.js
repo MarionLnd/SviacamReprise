@@ -223,11 +223,13 @@ rect2.on('mouseleave', function() {
 stage.container().style.cursor = 'default';
 });
 
+//Start to show the rectangle when the button Sensor 1 is clicked and change value of button
 
-//Start to show the rectangle when the button Sensor 1 is clicked
-$('#rect1').click(function () {
-    if (($('#rect1').is(':checked')) ){
-        $('#select_rect1').removeAttr('disabled');
+function changeS1() {
+  if (document.getElementById("btn1").value == "Sensor 1 désactivé")
+{
+  document.getElementById("btn1").value = "Sensor 1 activé";
+  $('#select_rect1').removeAttr('disabled');
         layer.add(rect1);
         layer.add(tr);
         tr.attachTo(rect1);
@@ -235,34 +237,48 @@ $('#rect1').click(function () {
         tr.show()
 
         layer.draw();
-    } else {
-        $('#select_rect1').attr('disabled', true);
+}else
+{
+  document.getElementById("btn1").value = "Sensor 1 désactivé";
+  $('#select_rect1').attr('disabled', true);
         rect1.hide();
         tr.hide();
         
         layer.draw();
-    }
-});
-//Start to show the rectangle when the button Sensor 1 is clicked
-$('#rect2').click(function () {
-  if ($('#rect2').is(':checked')) {
-      $('#select_rect2').removeAttr('disabled');
-     
-      layer.add(rect2);
-      layer.add(tr2);
-      tr2.attachTo(rect2);
-      rect2.show();
-      tr2.show()
-      layer.draw();
-  } else {
-      $('#select_rect2').attr('disabled', true);
-      rect2.hide();
-      tr2.hide()
-      layer.draw();
-  }
-});
+}
+
+}
+
+
+//Start to show the rectangle when the button Sensor 2 is clicked and change value of button
+
+function changeS2() {
+  if (document.getElementById("btn2").value == "Sensor 2 désactivé")
+{
+  document.getElementById("btn2").value = "Sensor 2 activé";
+  $('#select_rect2').removeAttr('disabled');
+        layer.add(rect2);
+        layer.add(tr2);
+        tr2.attachTo(rect2);
+        rect2.show();
+        tr2.show()
+
+        layer.draw();
+}else
+{
+  document.getElementById("btn2").value = "Sensor 2 désactivé";
+  $('#select_rect2').attr('disabled', true);
+        rect2.hide();
+        tr2.hide();
+        
+        layer.draw();
+}
+
+}
+
+
 //both 
-if (($('#rect1').is(':checked')) && ($('#rect2').is(':checked')) ){
+if ((document.getElementById("btn1").value == "Sensor 1 activé") && (document.getElementById("btn2").value = "Sensor 2 activé") ){
   $('#select_rect1').removeAttr('disabled');
   $('#select_rect2').removeAttr('disabled');
   layer.add(rect1);
@@ -282,7 +298,7 @@ if (($('#rect1').is(':checked')) && ($('#rect2').is(':checked')) ){
 // Set the points of the reactangle when the button Threshold is clicked_
 $('#threshold').click(function () {
   if (($('#threshold').is(':checked'))) {
-    if (($('#rect1').is(':checked'))) {
+    if (document.getElementById("btn1").value = "Sensor 1 activé") {
         key = $("#select_rect1").val().toLowerCase();
         // if points_value is empty (not dragged or transformed)
         if (Object.keys(points).length === 0 && points.constructor === Object) {
@@ -304,7 +320,7 @@ $('#threshold').click(function () {
 });
 $('#threshold').click(function () {
   if (($('#threshold').is(':checked'))) {
-  if (($('#rect2').is(':checked'))) {
+  if (document.getElementById("btn2").value = "Sensor 2 activé") {
    
       key2 = $("#select_rect2").val().toLowerCase();
       // if points_value is empty (not dragged or transformed)
