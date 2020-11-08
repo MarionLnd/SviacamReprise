@@ -32,5 +32,6 @@ canvas {
 	/*transform: rotateY(180deg);
 	-webkit-transform:rotateY(180deg); /* Safari and Chrome */
 	/*-moz-transform:rotateY(180deg); /* Firefox */
-	border: solid 2px black;
+	border:3px solid black !important;
+	
 }
