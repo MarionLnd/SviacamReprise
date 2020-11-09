@@ -1,4 +1,5 @@
 // Set width and height of the stage and webcam
+
 let width = 700
 let height = 600
 
@@ -39,20 +40,75 @@ const landmarkColors = {
 };
 
 const gestureStrings = {
-    'thumbs_up': '👍',
-    'victory': '✌🏻',
-    // 'thumbs_down' : '👎'
+    'go_up': '👆',
+    'victory': '✌',
+    'thumbs_down': '👇',
+    'thumbs_left': '👉',
+    'thumbs_right': '👈',
+    'thumbs_Curl': '✊'
 };
 
 async function main() {
     const canvas = document.querySelector("#pose-canvas");
     const ctx = canvas.getContext("2d");
     const resultLayer = document.querySelector("#pose-result");
+    //add new gestures
+    //up
+    const thumbsupGesture = new fp.GestureDescription('go_up');
+    thumbsupGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
+    thumbsupGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalUp, 1.0);
+    thumbsupGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownLeft, 0.5);
+    thumbsupGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownRight, 0.5);
+    thumbsupGesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
+    thumbsupGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+    thumbsupGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+    thumbsupGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+    //down
+    const thumbsDownGesture = new fp.GestureDescription('thumbs_down');
+    thumbsDownGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
+    thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalDown, 1.0);
+    thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownLeft, 0.5);
+    thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownRight, 0.5);
+    thumbsDownGesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
+    thumbsDownGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+    thumbsDownGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+    thumbsDownGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+
+    //left
+    const thumbsleftGesture = new fp.GestureDescription('thumbs_left');
+    thumbsleftGesture.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
+    thumbsleftGesture.addDirection(fp.Finger.Index, fp.FingerDirection.HorizontalLeft, 1.0);
+    thumbsleftGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.FullCurl, 1.0);
+    thumbsleftGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+    thumbsleftGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+    thumbsleftGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+
+    //right
+    const thumbsRightGesture = new fp.GestureDescription('thumbs_right');
+    thumbsRightGesture.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
+    thumbsRightGesture.addDirection(fp.Finger.Index, fp.FingerDirection.HorizontalRight, 1.0);
+    thumbsRightGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.FullCurl, 1.0);
+    thumbsRightGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+    thumbsRightGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+    thumbsRightGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+
+    //close
+    const thumbsCurlGesture = new fp.GestureDescription('thumbs_Curl');
+
+    thumbsCurlGesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
+    thumbsCurlGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.FullCurl, 1.0);
+    thumbsCurlGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+    thumbsCurlGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+    thumbsCurlGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
 
     const knownGestures = [
         fp.Gestures.VictoryGesture,
-        fp.Gestures.ThumbsUpGesture,
-        //fp.Gestures.ThumbsDownGesture
+        thumbsupGesture,
+        thumbsleftGesture,
+        thumbsDownGesture,
+        thumbsRightGesture,
+        thumbsCurlGesture
+
     ];
     const GE = new fp.GestureEstimator(knownGestures);
 
@@ -71,10 +127,10 @@ async function main() {
         // Therefore the maximum number of predictions is 1
         const predictions = await model.estimateHands(video, true);
 
-        for(let i = 0; i < predictions.length; i++) {
+        for (let i = 0; i < predictions.length; i++) {
             // draw colored dots at each predicted joint position
-            for(let part in predictions[i].annotations) {
-                for(let point of predictions[i].annotations[part]) {
+            for (let part in predictions[i].annotations) {
+                for (let point of predictions[i].annotations[part]) {
                     drawPoint(ctx, point[0], point[1], 3, landmarkColors[part]);
                 }
             }
@@ -82,7 +138,7 @@ async function main() {
             // using a minimum confidence of 7.5 (out of 10)
             const est = GE.estimate(predictions[i].landmarks, 7.5);
 
-            if(est.gestures.length > 0) {
+            if (est.gestures.length > 0) {
 
                 // find gesture with highest confidence
                 let result = est.gestures.reduce((p, c) => {
@@ -90,6 +146,17 @@ async function main() {
                 });
 
                 resultLayer.innerText = gestureStrings[result.name];
+                console.log(result.name);
+
+                if (result.name === "victory") {
+                    console.log("C'est Ok jusque là");
+
+
+                    //  alert("ok");
+
+
+
+                }
             }
         }
         setTimeout(() => { estimateHands(); }, 1000 / video.fps);
@@ -119,10 +186,14 @@ function get_video() {
                 console.log("Webcam is working")
                 video.srcObject = stream
                 video.play()
-                video.addEventListener("loadeddata", event => {
-                    console.log("Camera is ready");
-                    main();
-                });
+            
+                
+                    video.addEventListener("loadeddata", event => {
+                        console.log("Camera is ready");
+                        main();
+                    });
+                
+              
 
                 core = core()
             })
