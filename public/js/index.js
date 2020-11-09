@@ -165,6 +165,11 @@ async function main() {
 
     console.log("Starting predictions");
 }
+/*
+function stopHandDetection() {
+    const model = handpose.load();
+    model.estimateHands(video, false)
+}*/
 
 function drawPoint(ctx, x, y, r, color) {
     ctx.beginPath();
@@ -173,6 +178,19 @@ function drawPoint(ctx, x, y, r, color) {
     ctx.fill();
 }
 
+function changeS3() {
+    if (document.getElementById("btn3").value === "Détection des doigts désactivée") {
+        document.getElementById("btn3").value = "Détection des doigts activée";
+        document.getElementById("btn3").style.backgroundColor= "green";
+        document.getElementById("btn3").style.color= "white";
+
+        main()
+    } else {
+        document.getElementById("btn3").value = "Détection des doigts désactivée";
+        document.getElementById("btn3").style.backgroundColor= "blue";
+        document.getElementById("btn3").style.color= "white";
+    }
+}
 
 //Function to play the video
 function get_video() {
@@ -186,15 +204,6 @@ function get_video() {
                 console.log("Webcam is working")
                 video.srcObject = stream
                 video.play()
-            
-                
-                    video.addEventListener("loadeddata", event => {
-                        console.log("Camera is ready");
-                        main();
-                    });
-                
-              
-
                 core = core()
             })
             .catch(function (error) {

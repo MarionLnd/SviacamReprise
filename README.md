@@ -35,3 +35,5 @@ Les mouvements sont à présents détectés. Allez sur une autre page pour teste
 2) Le projet [Motion detection in Javascript](https://github.com/beije/motion-detection-in-javascript) réalisé par [Benjamin Horn](https://github.com/beije) pour détécter les mouvements de l'utilisateur. 
 3) [Socket.IO](https://socket.io/get-started/chat) pour emettre des évènements à partir des mouvements de l'utilisateur.
 4) [RobotJS](http://robotjs.io/docs/) pour lancer les évènements de souris ou de clavier.
+5) [FingerPose](https://github.com/andypotato/fingerpose) afin de détecter les mouvements précis des doigts
+6) [TensorFlow](https://www.tensorflow.org/) 
