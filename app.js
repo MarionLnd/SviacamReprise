@@ -39,6 +39,24 @@ io.on('connection', function (socket) {
     socket.emit('done', true)
         
   })
+  socket.on('move',function(key){
+    console.log(key);
+    let mouse = robot.getMousePos();
+    if(key === "go_up"){
+      
+      robot.moveMouseSmooth(mouse.x, mouse.y - 50);
+    } else if (key === 'thumbs_down'){
+      robot.moveMouseSmooth(mouse.x, mouse.y + 50);
+    }else if (key === 'thumbs_left'){
+      robot.moveMouseSmooth(mouse.x + 50, mouse.y);
+    }else if (key === 'thumbs_right'){
+      robot.moveMouseSmooth(mouse.x - 50, mouse.y);
+    }
+    else if (key === 'thumbs_Curl'){
+      app.get('/',(req, res) => {
+        res.send("<script>window.close();</script > ")})
+    }
+  })
 })
 
 server.listen(process.env.PORT || 3000)

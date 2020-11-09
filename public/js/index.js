@@ -4,7 +4,7 @@ let width = 700
 let height = 600
 
 let titleHeight = $("#main-title").height() + parseInt($("#main-title").css("marginBottom").replaceAll("px", ""))
-
+let socket = io();
 let video = document.createElement('video')
 video.autoplay = true
 
@@ -146,17 +146,9 @@ async function main() {
                 });
 
                 resultLayer.innerText = gestureStrings[result.name];
-                console.log(result.name);
-
-                if (result.name === "victory") {
-                    console.log("C'est Ok jusque là");
-
-
-                    //  alert("ok");
-
-
-
-                }
+               
+                socket.emit('move',result.name);
+               
             }
         }
         setTimeout(() => { estimateHands(); }, 1000 / video.fps);
