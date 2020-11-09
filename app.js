@@ -52,10 +52,12 @@ io.on('connection', function (socket) {
     }else if (key === 'thumbs_right'){
       robot.moveMouseSmooth(mouse.x - 50, mouse.y);
     }
-    else if (key === 'thumbs_Curl'){
-      app.get('/',(req, res) => {
-        res.send("<script>window.close();</script > ")})
-    }
+   /* else if (key === 'thumbs_Curl'){
+      app.get('/', (res) => {
+        
+res.redirect('http://www.google.com')
+      })
+    }*/
   })
 })
 

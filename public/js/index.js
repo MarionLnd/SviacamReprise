@@ -48,115 +48,119 @@ const gestureStrings = {
     'thumbs_Curl': '✊'
 };
 
-async function main() {
-    const canvas = document.querySelector("#pose-canvas");
-    const ctx = canvas.getContext("2d");
-    const resultLayer = document.querySelector("#pose-result");
-    //add new gestures
-    //up
-    const thumbsupGesture = new fp.GestureDescription('go_up');
-    thumbsupGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
-    thumbsupGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalUp, 1.0);
-    thumbsupGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownLeft, 0.5);
-    thumbsupGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownRight, 0.5);
-    thumbsupGesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
-    thumbsupGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
-    thumbsupGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
-    thumbsupGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
-    //down
-    const thumbsDownGesture = new fp.GestureDescription('thumbs_down');
-    thumbsDownGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
-    thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalDown, 1.0);
-    thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownLeft, 0.5);
-    thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownRight, 0.5);
-    thumbsDownGesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
-    thumbsDownGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
-    thumbsDownGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
-    thumbsDownGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
-
-    //left
-    const thumbsleftGesture = new fp.GestureDescription('thumbs_left');
-    thumbsleftGesture.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
-    thumbsleftGesture.addDirection(fp.Finger.Index, fp.FingerDirection.HorizontalLeft, 1.0);
-    thumbsleftGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.FullCurl, 1.0);
-    thumbsleftGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
-    thumbsleftGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
-    thumbsleftGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
-
-    //right
-    const thumbsRightGesture = new fp.GestureDescription('thumbs_right');
-    thumbsRightGesture.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
-    thumbsRightGesture.addDirection(fp.Finger.Index, fp.FingerDirection.HorizontalRight, 1.0);
-    thumbsRightGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.FullCurl, 1.0);
-    thumbsRightGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
-    thumbsRightGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
-    thumbsRightGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
-
-    //close
-    const thumbsCurlGesture = new fp.GestureDescription('thumbs_Curl');
-
-    thumbsCurlGesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
-    thumbsCurlGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.FullCurl, 1.0);
-    thumbsCurlGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
-    thumbsCurlGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
-    thumbsCurlGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
-
-    const knownGestures = [
-        fp.Gestures.VictoryGesture,
-        thumbsupGesture,
-        thumbsleftGesture,
-        thumbsDownGesture,
-        thumbsRightGesture,
-        thumbsCurlGesture
-
-    ];
-    const GE = new fp.GestureEstimator(knownGestures);
-
-    // load handpose model
-    const model = await handpose.load();
-    console.log("Handpose model loaded");
-
-    const estimateHands = async () => {
-
-        // clear canvas overlay
-        ctx.clearRect(0, 0, video.width, video.height);
-        resultLayer.innerText = '';
-
-        // get hand landmarks from video
-        // Note: Handpose currently only detects one hand at a time
-        // Therefore the maximum number of predictions is 1
-        const predictions = await model.estimateHands(video, true);
-
-        for (let i = 0; i < predictions.length; i++) {
-            // draw colored dots at each predicted joint position
-            for (let part in predictions[i].annotations) {
-                for (let point of predictions[i].annotations[part]) {
-                    drawPoint(ctx, point[0], point[1], 3, landmarkColors[part]);
+    async function main() {
+        
+        const canvas = document.querySelector("#pose-canvas");
+        const ctx = canvas.getContext("2d");
+        const resultLayer = document.querySelector("#pose-result");
+        //add new gestures
+        //up
+        const thumbsupGesture = new fp.GestureDescription('go_up');
+        thumbsupGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
+        thumbsupGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalUp, 1.0);
+        thumbsupGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownLeft, 0.5);
+        thumbsupGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownRight, 0.5);
+        thumbsupGesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
+        thumbsupGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+        thumbsupGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+        thumbsupGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+        //down
+        const thumbsDownGesture = new fp.GestureDescription('thumbs_down');
+        thumbsDownGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
+        thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalDown, 1.0);
+        thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownLeft, 0.5);
+        thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownRight, 0.5);
+        thumbsDownGesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
+        thumbsDownGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+        thumbsDownGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+        thumbsDownGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+    
+        //left
+        const thumbsleftGesture = new fp.GestureDescription('thumbs_left');
+        thumbsleftGesture.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
+        thumbsleftGesture.addDirection(fp.Finger.Index, fp.FingerDirection.HorizontalLeft, 1.0);
+        thumbsleftGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.FullCurl, 1.0);
+        thumbsleftGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+        thumbsleftGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+        thumbsleftGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+    
+        //right
+        const thumbsRightGesture = new fp.GestureDescription('thumbs_right');
+        thumbsRightGesture.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
+        thumbsRightGesture.addDirection(fp.Finger.Index, fp.FingerDirection.HorizontalRight, 1.0);
+        thumbsRightGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.FullCurl, 1.0);
+        thumbsRightGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+        thumbsRightGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+        thumbsRightGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+    
+        //close
+        const thumbsCurlGesture = new fp.GestureDescription('thumbs_Curl');
+    
+        thumbsCurlGesture.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
+        thumbsCurlGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.FullCurl, 1.0);
+        thumbsCurlGesture.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+        thumbsCurlGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+        thumbsCurlGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+    
+        const knownGestures = [
+            fp.Gestures.VictoryGesture,
+            thumbsupGesture,
+            thumbsleftGesture,
+            thumbsDownGesture,
+            thumbsRightGesture,
+            thumbsCurlGesture
+    
+        ];
+        const GE = new fp.GestureEstimator(knownGestures);
+    
+        // load handpose model
+        const model = await handpose.load();
+        console.log("Handpose model loaded");
+    
+        const estimateHands = async () => {
+    
+            // clear canvas overlay
+            ctx.clearRect(0, 0, video.width, video.height);
+            resultLayer.innerText = '';
+    
+            // get hand landmarks from video
+            // Note: Handpose currently only detects one hand at a time
+            // Therefore the maximum number of predictions is 1
+            const predictions = await model.estimateHands(video, true);
+    
+            for (let i = 0; i < predictions.length; i++) {
+                // draw colored dots at each predicted joint position
+                for (let part in predictions[i].annotations) {
+                    for (let point of predictions[i].annotations[part]) {
+                        drawPoint(ctx, point[0], point[1], 3, landmarkColors[part]);
+                    }
+                }
+                // now estimate gestures based on landmarks
+                // using a minimum confidence of 7.5 (out of 10)
+                const est = GE.estimate(predictions[i].landmarks, 7.5);
+    
+                if (est.gestures.length > 0) {
+    
+                    // find gesture with highest confidence
+                    let result = est.gestures.reduce((p, c) => {
+                        return (p.confidence > c.confidence) ? p : c;
+                    });
+    
+                    resultLayer.innerText = gestureStrings[result.name];
+                   
+                    socket.emit('move',result.name);
+                   
                 }
             }
-            // now estimate gestures based on landmarks
-            // using a minimum confidence of 7.5 (out of 10)
-            const est = GE.estimate(predictions[i].landmarks, 7.5);
+            setTimeout(() => { estimateHands(); }, 1000 / video.fps);
+        };
+        await estimateHands();
+    
+        console.log("Starting predictions");
+        
+    }
 
-            if (est.gestures.length > 0) {
 
-                // find gesture with highest confidence
-                let result = est.gestures.reduce((p, c) => {
-                    return (p.confidence > c.confidence) ? p : c;
-                });
-
-                resultLayer.innerText = gestureStrings[result.name];
-               
-                socket.emit('move',result.name);
-               
-            }
-        }
-        setTimeout(() => { estimateHands(); }, 1000 / video.fps);
-    };
-    await estimateHands();
-
-    console.log("Starting predictions");
-}
 /*
 function stopHandDetection() {
     const model = handpose.load();
@@ -175,14 +179,16 @@ function changeS3() {
         document.getElementById("btn3").value = "Détection des doigts activée";
         document.getElementById("btn3").style.backgroundColor= "green";
         document.getElementById("btn3").style.color= "white";
-
-        main()
+        main();
+        
     } else {
         document.getElementById("btn3").value = "Détection des doigts désactivée";
         document.getElementById("btn3").style.backgroundColor= "blue";
         document.getElementById("btn3").style.color= "white";
+        get_video();
     }
 }
+
 
 //Function to play the video
 function get_video() {
