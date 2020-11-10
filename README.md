@@ -6,7 +6,7 @@ Ce projet est une reprise du projet Sviacam, dont le code source original se sit
 #### Piloter des logiciels en repérant, grâce à la Webcam , des gestes effectués dans des zones prédéfinies.
 
 
-### Pour coder ce projet, j'ai utilisé :  
+### Pour coder ce projet, nous avons utilisé :  
 - **Javascript**
 - **Jquery**
 - **NodeJs**
@@ -19,21 +19,21 @@ Ce projet est une reprise du projet Sviacam, dont le code source original se sit
 
 
 ### Documentation d'utilisation :
-1) Commencez par cliquer sur le bouton, le rectangle dans lequel sera analysé vos mouvements apparait.
-![Screenshot 2019-06-27 21 22 22 - Copy](https://user-images.githubusercontent.com/30896388/60295351-ccc6da80-9923-11e9-8224-778137da0bcb.png)
-2) Choisissez une action qui se déclenchera lors de votre mouvement.
-![Screenshot 2019-06-27 21 22 37](https://user-images.githubusercontent.com/30896388/60295352-ccc6da80-9923-11e9-8040-4aa1dbabfea2.png)
-3) Déterminez la taille et la zone du rectangle.
-![Screenshot 2019-06-27 21 22 52 - Copy](https://user-images.githubusercontent.com/30896388/60295354-ccc6da80-9923-11e9-9086-6421835055de.png)
-4) Appuyez sur le bouton "Set Threshold" pour sauvegarder les informations.
-Les mouvements sont à présents détectés. Allez sur une autre page pour tester l'évènement souris ou clavier choisi précèdemment (étape 2). Dès que vous entendez un "click", l'évènement est déclenché.
-![Screenshot 2019-06-27 21 25 05](https://user-images.githubusercontent.com/30896388/60295355-cd5f7100-9923-11e9-8c07-74b1e6e27b76.png)
+#### Interface du projet :
+![Screenshot 2020-11-09 20 28 58](https://user-images.githubusercontent.com/31901812/98645777-b6f86080-2332-11eb-8ac3-04801bfa5a0d.png)
 
+1) Vous pouvez cliquer sur au moins un des boutons présents dans la partie "Zones de détection (bleue)" afin d'activer et afficher les zones dans lesquelles vos mouvements seront analysés.
+2) Choisissez une action par zone activée qui se déclenchera lors de votre mouvement.
+3) Appuyez sur la case "Activer la détection" afin de sauvegarder les informations des mouvements. Ces derniers sont à présent détectés et vous pouvez constater les différentes actions et évènements déclenchés au passage dans les zones concernées et un son sera émis.
+4) Vous avez également la possibilité d'activer la détection des mouvements de la main et des doigts afin de déclencher d'autres actions telles que :
+
+       👉 : la souris se dirige vers la droite
+       👈 : la souris se dirige vers la gauche
 
 ## Librairies ou outils utilisés :
 1) [KonvaJs](https://konvajs.org/) pour que l'utilisateur puisse déterminer et modifier le rectangle ou sera anaylisé ses mouvements.
 2) Le projet [Motion detection in Javascript](https://github.com/beije/motion-detection-in-javascript) réalisé par [Benjamin Horn](https://github.com/beije) pour détécter les mouvements de l'utilisateur. 
 3) [Socket.IO](https://socket.io/get-started/chat) pour emettre des évènements à partir des mouvements de l'utilisateur.
 4) [RobotJS](http://robotjs.io/docs/) pour lancer les évènements de souris ou de clavier.
-5) [FingerPose](https://github.com/andypotato/fingerpose) afin de détecter les mouvements précis des doigts
-6) [TensorFlow](https://www.tensorflow.org/) 
+5) [TensorFlow](https://www.tensorflow.org/) afin de détecter les mouvements précis des doigts
+6) [FingerPose](https://github.com/andypotato/fingerpose) qui utilise la technologie Google d'apprentissage automatique [TensorFlow](https://www.tensorflow.org/)
